@@ -16,6 +16,8 @@
     "@oclif/plugin-warn-if-update-available": "^1.7.0",
     "@oclif/plugin-which": "^1.0.3",
     "conf-cli": "^0.1.9",
+    "inquirer": "^7.0.3",
+    "lookpath": "^1.0.4",
     "tslib": "^1.10.0"
   },
   "description": "CLI to assist running commands inside containers",
@@ -23,6 +25,7 @@
     "@oclif/dev-cli": "^1.22.2",
     "@oclif/test": "^1.2.5",
     "@types/chai": "^4.2.7",
+    "@types/inquirer": "^6.5.0",
     "@types/mocha": "^5.2.7",
     "@types/node": "^13.5.0",
     "chai": "^4.2.0",
@@ -81,6 +84,11 @@
   "oclif": {
     "bin": "run-in-container",
     "commands": "./lib/commands",
+    "hooks": {
+      "init": [
+        "./lib/hooks/init"
+      ]
+    },
     "plugins": [
       "conf-cli",
       "@oclif/plugin-autocomplete",
