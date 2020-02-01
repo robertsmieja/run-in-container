@@ -1,5 +1,9 @@
 # run-in-container
 
+**WARNING!**
+
+Unfinished project!
+
 CLI to assist running commands inside containers
 
 [![oclif](https://img.shields.io/badge/cli-oclif-brightgreen.svg)](https://oclif.io)
@@ -42,6 +46,7 @@ USAGE
 - [`run-in-container conf [KEY] [VALUE]`](#run-in-container-conf-key-value)
 - [`run-in-container hello [FILE]`](#run-in-container-hello-file)
 - [`run-in-container help [COMMAND]`](#run-in-container-help-command)
+- [`run-in-container run [FILE]`](#run-in-container-run-file)
 - [`run-in-container update [CHANNEL]`](#run-in-container-update-channel)
 - [`run-in-container which COMMAND`](#run-in-container-which-command)
 
@@ -144,6 +149,22 @@ OPTIONS
 ```
 
 _See code: [@oclif/plugin-help](https://github.com/oclif/plugin-help/blob/v2.2.3/src/commands/help.ts)_
+
+## `run-in-container run [FILE]`
+
+describe the command here
+
+```
+USAGE
+  $ run-in-container run [FILE]
+
+OPTIONS
+  -f, --force
+  -h, --help       show CLI help
+  -n, --name=name  name to print
+```
+
+_See code: [src/commands/run.ts](https://github.com/robertsmieja/run-in-container/blob/v0.0.1/src/commands/run.ts)_
 
 ## `run-in-container update [CHANNEL]`
 
