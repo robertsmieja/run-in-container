@@ -86,7 +86,8 @@
     "commands": "./lib/commands",
     "hooks": {
       "init": [
-        "./lib/hooks/init"
+        "./lib/hooks/init",
+        "./lib/hooks/command-not-found"
       ]
     },
     "plugins": [
