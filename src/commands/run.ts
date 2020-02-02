@@ -2,6 +2,7 @@ import { Command } from "@oclif/command"
 import configuration from "../configuration"
 import { properties } from "../configuration/schema"
 import ContainerRuntimeToCLI from "../containerRuntimes/cli"
+import { spawnSync } from "child_process"
 
 export default class Run extends Command {
   static description = "Run a container. Similar to 'docker run'"
@@ -22,13 +23,20 @@ export default class Run extends Command {
     const { argv } = this.parse(Run)
 
     const containerRuntime = configuration.get(properties.containerRuntime)
-    const containerRuntimeCli = ContainerRuntimeToCLI[containerRuntime]
-    const commandToRun = `${
-      containerRuntimeCli.executable
-    } ${containerRuntimeCli.subCommand ?? ""} ${argv.reduce(
-      (previous, current) => `${previous} ${current}`
-    )}`
+    const { executable, subCommand } = ContainerRuntimeToCLI[containerRuntime]
+    const processArgv = (subCommand ? [subCommand] : []).concat(argv)
 
-    this.log(commandToRun)
+    this.debug(`executable: ${executable}`)
+    this.debug(`subCommand: ${subCommand}`)
+    this.debug(`argv: ${argv}`)
+    this.debug(`processArgv: ${processArgv}`)
+
+    const containerProcess = spawnSync(executable, processArgv, {
+      stdio: "inherit",
+    })
+    if (containerProcess.error) {
+      this.log(JSON.stringify(containerProcess.error))
+      this.exit(1)
+    }
   }
 }
