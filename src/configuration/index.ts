@@ -24,10 +24,11 @@ const configuration = new Conf<string>({
   schema,
 })
 
-export const initConfig = async (force = false) => {
+export const initConfig = async (options = { rerun: false }) => {
+  const { rerun } = options
   const questions: inquirer.DistinctQuestion[] = []
 
-  if (!configuration.has(properties.containerRuntime) && !force) {
+  if (rerun || !configuration.has(properties.containerRuntime)) {
     const runtimes = await detectContainerRuntimes()
 
     questions.push({
