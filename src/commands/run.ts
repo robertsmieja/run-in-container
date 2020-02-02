@@ -1,9 +1,12 @@
-import { Command, flags } from "@oclif/command"
+import { Command } from "@oclif/command"
+import configuration from "../configuration"
+import { properties } from "../configuration/schema"
+import ContainerRuntimeToCLI from "../containerRuntimes/cli"
 
 export default class Run extends Command {
   static description = "Run a container. Similar to 'docker run'"
 
-  strict = false
+  static strict = false
 
   static flags = {
     // help: flags.help({ char: "h" }),
@@ -16,14 +19,16 @@ export default class Run extends Command {
   // static args = [{ name: "file" }]
 
   async run() {
-    const { args, flags } = this.parse(Run)
+    const { argv } = this.parse(Run)
 
-    const name = flags.name || "world"
-    this.log(
-      `hello ${name} from /home/rsmieja/git/run-in-container/src/commands/run.ts`
-    )
-    if (args.file && flags.force) {
-      this.log(`you input --force and --file: ${args.file}`)
-    }
+    const containerRuntime = configuration.get(properties.containerRuntime)
+    const containerRuntimeCli = ContainerRuntimeToCLI[containerRuntime]
+    const commandToRun = `${
+      containerRuntimeCli.executable
+    } ${containerRuntimeCli.subCommand ?? ""} ${argv.reduce(
+      (previous, current) => `${previous} ${current}`
+    )}`
+
+    this.log(commandToRun)
   }
 }

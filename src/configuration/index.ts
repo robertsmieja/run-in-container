@@ -1,5 +1,5 @@
 import Conf from "conf"
-import schema, { containerRuntimes, properties } from "./schema"
+import { containerRuntimes, properties, schema } from "./schema"
 import { lookpath } from "lookpath"
 import inquirer, { ListQuestion } from "inquirer"
 
@@ -19,14 +19,15 @@ const detectContainerRuntimes = async () => {
 
   return runtimes
 }
-const initConfig = async () => {
-  const config = new Conf({
-    projectName: "run-in-container", // TODO why can't this be autodetected?
-    schema,
-  })
+const configuration = new Conf<string>({
+  projectName: "run-in-container", // TODO why can't this be autodetected?
+  schema,
+})
+
+export const initConfig = async (force = false) => {
   const questions: inquirer.DistinctQuestion[] = []
 
-  if (!config.has(properties.containerRuntime)) {
+  if (!configuration.has(properties.containerRuntime) && !force) {
     const runtimes = await detectContainerRuntimes()
 
     questions.push({
@@ -47,9 +48,9 @@ const initConfig = async () => {
     const answers = await inquirer.prompt(questions)
 
     for (const key of Object.keys(answers)) {
-      config.set(key, answers[key])
+      configuration.set(key, answers[key])
     }
   }
 }
 
-export default initConfig
+export default configuration

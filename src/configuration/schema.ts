@@ -9,7 +9,7 @@ export enum containerRuntimes {
   podman = "podman",
 }
 
-const schema: Record<any, JSONSchema> = {
+export const schema: Record<any, JSONSchema> = {
   [properties.containerRuntime]: {
     type: "string",
     enum: Object.keys(containerRuntimes),
@@ -17,5 +17,3 @@ const schema: Record<any, JSONSchema> = {
 }
 
 export const schemaKeys = Object.keys(schema)
-
-export default schema

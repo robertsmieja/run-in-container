@@ -44,9 +44,9 @@ USAGE
 - [`run-in-container autocomplete [SHELL]`](#run-in-container-autocomplete-shell)
 - [`run-in-container commands`](#run-in-container-commands)
 - [`run-in-container conf [KEY] [VALUE]`](#run-in-container-conf-key-value)
-- [`run-in-container hello [FILE]`](#run-in-container-hello-file)
 - [`run-in-container help [COMMAND]`](#run-in-container-help-command)
-- [`run-in-container run [FILE]`](#run-in-container-run-file)
+- [`run-in-container init [FILE]`](#run-in-container-init-file)
+- [`run-in-container run`](#run-in-container-run)
 - [`run-in-container update [CHANNEL]`](#run-in-container-update-channel)
 - [`run-in-container which COMMAND`](#run-in-container-which-command)
 
@@ -113,26 +113,6 @@ OPTIONS
 
 _See code: [conf-cli](https://github.com/natzcam/conf-cli/blob/v0.1.9/src/commands/conf.ts)_
 
-## `run-in-container hello [FILE]`
-
-describe the command here
-
-```
-USAGE
-  $ run-in-container hello [FILE]
-
-OPTIONS
-  -f, --force
-  -h, --help       show CLI help
-  -n, --name=name  name to print
-
-EXAMPLE
-  $ run-in-container hello
-  hello world from ./src/hello.ts!
-```
-
-_See code: [src/commands/hello.ts](https://github.com/robertsmieja/run-in-container/blob/v0.0.1/src/commands/hello.ts)_
-
 ## `run-in-container help [COMMAND]`
 
 display help for run-in-container
@@ -150,18 +130,29 @@ OPTIONS
 
 _See code: [@oclif/plugin-help](https://github.com/oclif/plugin-help/blob/v2.2.3/src/commands/help.ts)_
 
-## `run-in-container run [FILE]`
+## `run-in-container init [FILE]`
 
 describe the command here
 
 ```
 USAGE
-  $ run-in-container run [FILE]
+  $ run-in-container init [FILE]
 
 OPTIONS
   -f, --force
   -h, --help       show CLI help
   -n, --name=name  name to print
+```
+
+_See code: [src/commands/init.ts](https://github.com/robertsmieja/run-in-container/blob/v0.0.1/src/commands/init.ts)_
+
+## `run-in-container run`
+
+Run a container. Similar to 'docker run'
+
+```
+USAGE
+  $ run-in-container run
 ```
 
 _See code: [src/commands/run.ts](https://github.com/robertsmieja/run-in-container/blob/v0.0.1/src/commands/run.ts)_

@@ -2,6 +2,7 @@ import { ContainerRuntimeCLI } from "./types"
 
 const PodmanCLI: ContainerRuntimeCLI = {
   executable: "podman",
+  subCommand: "run",
   options: {
     entrypoint: "--entrypoint",
     environment: "--env",
