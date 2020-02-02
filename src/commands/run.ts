@@ -1,6 +1,6 @@
 import { Command } from "@oclif/command"
 import configuration from "../configuration"
-import { properties } from "../configuration/schema"
+import { Properties } from "../configuration/schema"
 import ContainerRuntimeToCLI from "../containerRuntimes/cli"
 import { spawnSync } from "child_process"
 
@@ -22,7 +22,7 @@ export default class Run extends Command {
   async run() {
     const { argv } = this.parse(Run)
 
-    const containerRuntime = configuration.get(properties.containerRuntime)
+    const containerRuntime = configuration.get(Properties.containerRuntime)
     const { executable, subCommand } = ContainerRuntimeToCLI[containerRuntime]
     const processArgv = (subCommand ? [subCommand] : []).concat(argv)
 

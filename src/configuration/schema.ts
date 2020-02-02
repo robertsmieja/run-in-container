@@ -1,19 +1,20 @@
 import { JSONSchema } from "json-schema-typed"
 
-export enum properties {
+export const enum Properties {
   containerRuntime = "containerRuntime",
 }
 
-export enum containerRuntimes {
+export enum ContainerRuntimes {
   docker = "docker",
   podman = "podman",
 }
 
-export const schema: Record<any, JSONSchema> = {
-  [properties.containerRuntime]: {
+// https://github.com/Microsoft/TypeScript/issues/14106#issuecomment-280253269
+export type SchemaKeys = keyof typeof Properties
+
+export const Schema: Record<keyof typeof Properties, JSONSchema> = {
+  [Properties.containerRuntime]: {
     type: "string",
-    enum: Object.keys(containerRuntimes),
+    enum: Object.keys(ContainerRuntimes),
   },
 }
-
-export const schemaKeys = Object.keys(schema)

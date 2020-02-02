@@ -1,11 +1,11 @@
 import Conf from "conf"
-import { containerRuntimes, properties, schema } from "./schema"
+import { ContainerRuntimes, Properties, Schema } from "./schema"
 import { lookpath } from "lookpath"
 import inquirer, { ListQuestion } from "inquirer"
 
 const detectContainerRuntimes = async () => {
   const runtimes = []
-  for (const runtime of Object.keys(containerRuntimes)) {
+  for (const runtime of Object.keys(ContainerRuntimes)) {
     // eslint-disable-next-line no-await-in-loop
     const runtimePath = await lookpath(runtime)
 
@@ -21,18 +21,18 @@ const detectContainerRuntimes = async () => {
 }
 const configuration = new Conf<string>({
   projectName: "run-in-container", // TODO why can't this be autodetected?
-  schema,
+  schema: Schema,
 })
 
 export const initConfig = async (options = { rerun: false }) => {
   const { rerun } = options
   const questions: inquirer.DistinctQuestion[] = []
 
-  if (rerun || !configuration.has(properties.containerRuntime)) {
+  if (rerun || !configuration.has(Properties.containerRuntime)) {
     const runtimes = await detectContainerRuntimes()
 
     questions.push({
-      name: properties.containerRuntime,
+      name: Properties.containerRuntime,
       message: "Which container runtime should be the default?",
       type: "list",
       choices: runtimes.map(({ exec, path }) => {
