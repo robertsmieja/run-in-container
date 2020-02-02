@@ -1,16 +1,30 @@
 # run-in-container
 
-**WARNING!**
-
-Unfinished project!
-
-CLI to assist running commands inside containers
-
 [![oclif](https://img.shields.io/badge/cli-oclif-brightgreen.svg)](https://oclif.io)
 [![Version](https://img.shields.io/npm/v/run-in-container.svg)](https://npmjs.org/package/run-in-container)
 [![Codecov](https://codecov.io/gh/robertsmieja/run-in-container/branch/master/graph/badge.svg)](https://codecov.io/gh/robertsmieja/run-in-container)
 [![Downloads/week](https://img.shields.io/npm/dw/run-in-container.svg)](https://npmjs.org/package/run-in-container)
 [![License](https://img.shields.io/npm/l/run-in-container.svg)](https://github.com/robertsmieja/run-in-container/blob/master/package.json)
+
+# Overview
+
+CLI to assist running commands inside containers
+
+Supported container CLIs:
+
+- Docker
+- Podman
+
+Features:
+
+- Ability to detect available runtimes, and prompt for which one to use
+- Interactive configuration
+
+Planned:
+
+- Ability to store default arguments, such as volumes, ports, etc
+
+# Table of Contents
 
 <!-- toc -->
 
