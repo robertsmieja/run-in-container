@@ -6,8 +6,9 @@ import { spawnSync } from "child_process"
 import { ContainerRuntimeOptions } from "../containerRuntimes/options/types"
 
 export default class Run extends Command {
-  static description = `Run a container. Similar to 'docker run'. 
-  Any unrecognized arguments will be passed directly to the underlying CLI`
+  static description = `Run a container. Similar to 'docker run'.
+Run a container. Similar to 'docker run'. 
+Any unrecognized arguments will be passed directly to the underlying CLI`
 
   static strict = false
 
@@ -43,7 +44,7 @@ export default class Run extends Command {
       containerRuntime
     ]
 
-    let parsedArgv: string[] = []
+    let parsedArgv: string[] = subCommand ? [subCommand] : []
     for (const [flagKey, flagValue] of Object.entries(flags)) {
       if (flagValue) {
         if (typeof flagValue === "boolean") {
