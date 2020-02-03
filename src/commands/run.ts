@@ -48,12 +48,13 @@ Any unrecognized arguments will be passed directly to the underlying CLI`
     for (const [flagKey, flagValue] of Object.entries(flags)) {
       if (flagValue) {
         if (typeof flagValue === "boolean") {
-          parsedArgv = parsedArgv.concat([`--${flagKey}`])
-        } else {
           parsedArgv = parsedArgv.concat([
-            `--${flagKey}`,
-            options[flagKey as keyof ContainerRuntimeOptions],
+            `--${options[flagKey as keyof ContainerRuntimeOptions]}`,
           ])
+        } else {
+          parsedArgv = parsedArgv
+            .concat([`--${options[flagKey as keyof ContainerRuntimeOptions]}`])
+            .concat(flagValue)
         }
         // parsedArgv.concat(options[flagKey]
       }

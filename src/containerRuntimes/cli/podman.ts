@@ -6,8 +6,10 @@ const PodmanCLI: ContainerRuntimeCLI = {
   options: {
     entrypoint: "--entrypoint",
     environment: "--env",
+    interactive: "--interactive",
     port: "--publish",
     workingDirectory: "--workdir",
+    tty: "--tty",
     volume: "--volume",
   },
 }
