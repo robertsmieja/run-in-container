@@ -1,21 +1,43 @@
 /**
- * Boilerplate to mock out user configuration, and prevent real file I/O
+ * Boilerplate to mock out user configuration, inquirer, and prevent real file I/O
  */
 
 import { test } from "@oclif/test"
 import { SchemaKeys } from "../src/configuration/schema"
+import lookpath from "lookpath"
+import configuration from "../src/configuration"
+import sinon from "sinon"
+import inquirer, { QuestionCollection } from "inquirer"
 
-const testWithExtensions = () => {
-  test.register(
+type ConfigurationObject = Partial<Record<SchemaKeys, any>>
+
+const testWithExtensions = test
+  .add("inquirer", (): { questions?: QuestionCollection } => {
+    return {}
+  })
+  .stub(inquirer, "prompt", (questions: QuestionCollection) => {
+    test.add("inquirer", () => {
+      questions
+    })
+  })
+  .register(
     "configuration",
-    (configurationObject: Partial<Record<SchemaKeys, any>>) => {
+    (configurationObject: ConfigurationObject = {}) => {
       return {
-        run(ctx: { configuration: typeof configurationObject }) {
-          ctx.configuration = {}
+        run(ctx: { configuration: ConfigurationObject }) {
+          configuration.store = configurationObject
+          ctx.configuration = configurationObject
         },
       }
     }
   )
-}
+  .register("containerRuntimes", (runtimes: string[] = []) => {
+    return {
+      run(ctx: { containerRuntimes: string[] }) {
+        test.stub(lookpath, "lookpath", sinon.stub().returns(runtimes))
+        ctx.containerRuntimes = runtimes
+      },
+    }
+  })
 
 export default testWithExtensions

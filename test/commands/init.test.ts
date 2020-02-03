@@ -1,17 +1,27 @@
-import { expect, test } from "@oclif/test"
+// import { expect } from "@oclif/test"
+import test from ".."
 
 describe("init", () => {
   test
-    .stdout()
-    .command(["init"])
-    .it("runs hello", ctx => {
-      expect(ctx.stdout).to.contain("hello world")
-    })
-
-  test
-    .stdout()
-    .command(["init", "--name", "jeff"])
-    .it("runs hello --name jeff", ctx => {
-      expect(ctx.stdout).to.contain("hello jeff")
-    })
+  // test
+  //   .configuration({
+  //     containerRuntime: "docker",
+  //   })
+  //   .stdout()
+  //   .command(["init"])
+  //   .it("prompts for runtimes", ctx => {
+  //     expect(ctx.inquirer)
+  //     expect(ctx.stdout).to.contain(
+  //       "Which container runtime should be the default?"
+  //     )
+  //   })
+  // test
+  //   .configuration()
+  //   .stdout()
+  //   .command(["init"])
+  //   .it("prompts for runtimes", ctx => {
+  //     expect(ctx.stdout).to.contain(
+  //       "Which container runtime should be the default?"
+  //     )
+  //   })
 })
