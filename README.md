@@ -1,5 +1,7 @@
 # run-in-container
 
+CLI to assist running commands inside containers
+
 [![oclif](https://img.shields.io/badge/cli-oclif-brightgreen.svg)](https://oclif.io)
 [![Version](https://img.shields.io/npm/v/run-in-container.svg)](https://npmjs.org/package/run-in-container)
 [![Codecov](https://codecov.io/gh/robertsmieja/run-in-container/branch/master/graph/badge.svg)](https://codecov.io/gh/robertsmieja/run-in-container)
@@ -7,8 +9,6 @@
 [![License](https://img.shields.io/npm/l/run-in-container.svg)](https://github.com/robertsmieja/run-in-container/blob/master/package.json)
 
 # Overview
-
-CLI to assist running commands inside containers
 
 Supported container CLIs:
 
@@ -24,11 +24,11 @@ Planned:
 
 - Ability to store default arguments, such as volumes, ports, etc
 
-# Table of Contents
+# Table Of Contents
 
 <!-- toc -->
 
-- [run-in-container](#run-in-container)
+- [Overview](#overview)
 - [Usage](#usage)
 - [Commands](#commands)
   <!-- tocstop -->
@@ -59,8 +59,8 @@ USAGE
 - [`run-in-container commands`](#run-in-container-commands)
 - [`run-in-container conf [KEY] [VALUE]`](#run-in-container-conf-key-value)
 - [`run-in-container help [COMMAND]`](#run-in-container-help-command)
-- [`run-in-container init [FILE]`](#run-in-container-init-file)
-- [`run-in-container run`](#run-in-container-run)
+- [`run-in-container init`](#run-in-container-init)
+- [`run-in-container run [CONTAINER OPTIONS]`](#run-in-container-run-container-options)
 - [`run-in-container update [CHANNEL]`](#run-in-container-update-channel)
 - [`run-in-container which COMMAND`](#run-in-container-which-command)
 
@@ -144,29 +144,38 @@ OPTIONS
 
 _See code: [@oclif/plugin-help](https://github.com/oclif/plugin-help/blob/v2.2.3/src/commands/help.ts)_
 
-## `run-in-container init [FILE]`
+## `run-in-container init`
 
-describe the command here
+Run the initial configuration setup
 
 ```
 USAGE
-  $ run-in-container init [FILE]
-
-OPTIONS
-  -f, --force
-  -h, --help       show CLI help
-  -n, --name=name  name to print
+  $ run-in-container init
 ```
 
 _See code: [src/commands/init.ts](https://github.com/robertsmieja/run-in-container/blob/v0.0.1/src/commands/init.ts)_
 
-## `run-in-container run`
+## `run-in-container run [CONTAINER OPTIONS]`
 
-Run a container. Similar to 'docker run'
+Run a container. Similar to 'docker run'.
 
 ```
 USAGE
-  $ run-in-container run
+  $ run-in-container run [CONTAINER OPTIONS]
+
+OPTIONS
+  -i, --interactive
+  -t, --tty
+  -v, --volume=volume
+
+DESCRIPTION
+  Run a container. Similar to 'docker run'.
+  Any unrecognized arguments will be passed directly to the underlying CLI
+
+EXAMPLES
+  $ run-in-container run alpine echo "Hello world"
+  $ run-in-container run --interactive --tty alpine sh
+  $ run-in-container run -it alpine
 ```
 
 _See code: [src/commands/run.ts](https://github.com/robertsmieja/run-in-container/blob/v0.0.1/src/commands/run.ts)_
