@@ -3,6 +3,11 @@ import { ContainerRuntimes, Properties, Schema } from "./schema"
 import { lookpath } from "lookpath"
 import inquirer, { ListQuestion } from "inquirer"
 
+const configuration = new Conf<string>({
+  projectName: "run-in-container", // TODO why can't this be autodetected?
+  schema: Schema,
+})
+
 const detectContainerRuntimes = async () => {
   const runtimes = []
   for (const runtime of Object.keys(ContainerRuntimes)) {
@@ -19,10 +24,6 @@ const detectContainerRuntimes = async () => {
 
   return runtimes
 }
-const configuration = new Conf<string>({
-  projectName: "run-in-container", // TODO why can't this be autodetected?
-  schema: Schema,
-})
 
 export const initConfig = async (options = { rerun: false }) => {
   const { rerun } = options
