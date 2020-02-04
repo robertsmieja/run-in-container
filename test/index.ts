@@ -7,19 +7,10 @@ import { SchemaKeys } from "../src/configuration/schema"
 import lookpath from "lookpath"
 import configuration from "../src/configuration"
 import sinon from "sinon"
-import inquirer, { QuestionCollection } from "inquirer"
 
 type ConfigurationObject = Partial<Record<SchemaKeys, any>>
 
 const testWithExtensions = test
-  .add("inquirer", (): { questions?: QuestionCollection } => {
-    return {}
-  })
-  .stub(inquirer, "prompt", (questions: QuestionCollection) => {
-    test.add("inquirer", () => {
-      questions
-    })
-  })
   .register(
     "configuration",
     (configurationObject: ConfigurationObject = {}) => {

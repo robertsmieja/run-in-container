@@ -8,7 +8,7 @@ const configuration = new Conf<string>({
   schema: Schema,
 })
 
-const detectContainerRuntimes = async () => {
+export const detectContainerRuntimes = async () => {
   const runtimes = []
   for (const runtime of Object.keys(ContainerRuntimes)) {
     // eslint-disable-next-line no-await-in-loop
