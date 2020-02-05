@@ -1,8 +1,8 @@
 import { Command, flags } from "@oclif/command"
+import { spawnSync } from "child_process"
 import configuration from "../configuration"
 import { Properties } from "../configuration/schema"
 import ContainerRuntimeToCLI from "../containerRuntimes/cli"
-import { spawnSync } from "child_process"
 import { ContainerRuntimeOptions } from "../containerRuntimes/options/types"
 
 export default class Run extends Command {

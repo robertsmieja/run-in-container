@@ -1,8 +1,8 @@
 import { expect } from "@oclif/test"
-import test from ".."
 import * as lookpath from "lookpath"
-import { detectContainerRuntimes } from "../../src/configuration"
 import sinon from "sinon"
+import test from ".."
+import { detectContainerRuntimes } from "../../src/configuration"
 
 describe("detectContainerRuntimes", () => {
   test

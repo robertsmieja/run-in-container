@@ -1,8 +1,8 @@
 import { expect } from "@oclif/test"
+import sinon, { SinonStub } from "sinon"
 import test from ".."
 import * as configuration from "../../src/configuration"
 import * as initHook from "../../src/hooks/init"
-import sinon, { SinonStub } from "sinon"
 
 describe("init", () => {
   test

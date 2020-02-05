@@ -1,5 +1,5 @@
-import PodmanCLI from "./podman"
 import DockerCLI from "./docker"
+import PodmanCLI from "./podman"
 import { ContainerRuntimeCLI } from "./types"
 
 const ContainerRuntimeToCLI: Record<string, ContainerRuntimeCLI> = {

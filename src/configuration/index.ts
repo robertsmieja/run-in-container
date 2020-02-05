@@ -1,7 +1,7 @@
 import Conf from "conf"
-import { ContainerRuntimes, Properties, Schema } from "./schema"
-import { lookpath } from "lookpath"
 import inquirer, { ListQuestion } from "inquirer"
+import { lookpath } from "lookpath"
+import { ContainerRuntimes, Properties, Schema } from "./schema"
 
 const configuration = new Conf<string>({
   projectName: "run-in-container", // TODO why can't this be autodetected?

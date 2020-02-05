@@ -3,10 +3,10 @@
  */
 
 import { test } from "@oclif/test"
-import { SchemaKeys } from "../src/configuration/schema"
 import lookpath from "lookpath"
-import configuration from "../src/configuration"
 import sinon from "sinon"
+import configuration from "../src/configuration"
+import { SchemaKeys } from "../src/configuration/schema"
 
 type ConfigurationObject = Partial<Record<SchemaKeys, any>>
 
