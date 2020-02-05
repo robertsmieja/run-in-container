@@ -1,27 +1,20 @@
-// import { expect } from "@oclif/test"
+import { expect } from "@oclif/test"
 import test from ".."
+import * as configuration from "../../src/configuration"
+import * as initHook from "../../src/hooks/init"
+import sinon, { SinonStub } from "sinon"
 
 describe("init", () => {
   test
-  // test
-  //   .configuration({
-  //     containerRuntime: "docker",
-  //   })
-  //   .stdout()
-  //   .command(["init"])
-  //   .it("prompts for runtimes", ctx => {
-  //     expect(ctx.inquirer)
-  //     expect(ctx.stdout).to.contain(
-  //       "Which container runtime should be the default?"
-  //     )
-  //   })
-  // test
-  //   .configuration()
-  //   .stdout()
-  //   .command(["init"])
-  //   .it("prompts for runtimes", ctx => {
-  //     expect(ctx.stdout).to.contain(
-  //       "Which container runtime should be the default?"
-  //     )
-  //   })
+    .stub(initHook, "default", sinon.stub()) // prevent initConfig from being called here
+    .stub(configuration, "initConfig", sinon.stub())
+    .command(["init"])
+    .it(`calls initConfig with { rerun: true }`, () => {
+      const initConfigStub = configuration.initConfig as SinonStub
+      expect(initConfigStub.called).to.equal(true)
+      expect(initConfigStub.calledOnce).to.equal(true)
+      expect(
+        initConfigStub.calledOnceWithExactly(sinon.match({ rerun: true }))
+      ).to.equal(true)
+    })
 })
