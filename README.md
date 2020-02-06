@@ -44,7 +44,7 @@ $ npm install -g run-in-container
 $ run-in-container COMMAND
 running command...
 $ run-in-container (-v|--version|version)
-run-in-container/0.1.1 linux-x64 node-v12.14.1
+run-in-container/0.1.2 linux-x64 node-v12.14.1
 $ run-in-container --help [COMMAND]
 USAGE
   $ run-in-container COMMAND
@@ -63,8 +63,6 @@ USAGE
 - [`run-in-container help [COMMAND]`](#run-in-container-help-command)
 - [`run-in-container init`](#run-in-container-init)
 - [`run-in-container run [CONTAINER OPTIONS]`](#run-in-container-run-container-options)
-- [`run-in-container update [CHANNEL]`](#run-in-container-update-channel)
-- [`run-in-container which COMMAND`](#run-in-container-which-command)
 
 ## `run-in-container autocomplete [SHELL]`
 
@@ -155,7 +153,7 @@ USAGE
   $ run-in-container init
 ```
 
-_See code: [src/commands/init.ts](https://github.com/robertsmieja/run-in-container/blob/v0.1.1/src/commands/init.ts)_
+_See code: [src/commands/init.ts](https://github.com/robertsmieja/run-in-container/blob/v0.1.2/src/commands/init.ts)_
 
 ## `run-in-container run [CONTAINER OPTIONS]`
 
@@ -180,28 +178,6 @@ EXAMPLES
   $ run-in-container run -it alpine
 ```
 
-_See code: [src/commands/run.ts](https://github.com/robertsmieja/run-in-container/blob/v0.1.1/src/commands/run.ts)_
-
-## `run-in-container update [CHANNEL]`
-
-update the run-in-container CLI
-
-```
-USAGE
-  $ run-in-container update [CHANNEL]
-```
-
-_See code: [@oclif/plugin-update](https://github.com/oclif/plugin-update/blob/v1.3.9/src/commands/update.ts)_
-
-## `run-in-container which COMMAND`
-
-show which plugin a command is in
-
-```
-USAGE
-  $ run-in-container which COMMAND
-```
-
-_See code: [@oclif/plugin-which](https://github.com/oclif/plugin-which/blob/v1.0.3/src/commands/which.ts)_
+_See code: [src/commands/run.ts](https://github.com/robertsmieja/run-in-container/blob/v0.1.2/src/commands/run.ts)_
 
 <!-- commandsstop -->
