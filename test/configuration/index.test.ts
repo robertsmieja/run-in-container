@@ -1,6 +1,6 @@
 import { lookpath } from "lookpath"
-import { detectContainerRuntimes } from "../../src/configuration"
 import { mocked } from "ts-jest/utils"
+import { detectContainerRuntimes } from "../../src/configuration"
 
 jest.mock("lookpath")
 

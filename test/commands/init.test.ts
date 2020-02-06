@@ -1,6 +1,6 @@
-import { initConfig } from "../../src/configuration"
-import { mocked } from "ts-jest/utils"
 import { load } from "@oclif/config"
+import { mocked } from "ts-jest/utils"
+import { initConfig } from "../../src/configuration"
 
 jest.mock("../../src/configuration")
 
