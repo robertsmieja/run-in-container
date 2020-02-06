@@ -1,63 +1,46 @@
-import { expect } from "@oclif/test"
-import * as lookpath from "lookpath"
-import sinon from "sinon"
-import test from ".."
+import { lookpath } from "lookpath"
 import { detectContainerRuntimes } from "../../src/configuration"
+import { mocked } from "ts-jest/utils"
+
+jest.mock("lookpath")
 
 describe("detectContainerRuntimes", () => {
-  test
-    .stub(lookpath, "lookpath", () => Promise.resolve(undefined))
-    .it("works with no runtimes", async () => {
-      const runtimes = await detectContainerRuntimes()
-      expect(runtimes).to.have.lengthOf(0)
-      expect(runtimes).to.deep.equal([])
-    })
+  const lookpathMock = mocked(lookpath)
 
-  test
-    .stub(
-      lookpath,
-      "lookpath",
-      sinon
-        .stub()
-        .onFirstCall()
-        .resolves("/bin/docker")
-        .resolves(undefined)
-    )
-    .it("works with 1 runtime", async () => {
-      const runtimes = await detectContainerRuntimes()
-      expect(runtimes).to.have.lengthOf(1)
-      expect(runtimes).to.deep.equal([{ exec: "docker", path: "/bin/docker" }])
-    })
+  it("works with no runtimes", async () => {
+    lookpathMock.mockResolvedValueOnce((undefined as unknown) as string)
 
-  test
-    .stub(
-      lookpath,
-      "lookpath",
-      sinon
-        .stub()
-        .onFirstCall()
-        .resolves("/bin/docker")
-        .onSecondCall()
-        .resolves("/bin/podman")
-        .resolves(undefined)
-    )
-    .it("works with 1 runtime", async () => {
-      const runtimes = await detectContainerRuntimes()
-      expect(runtimes).to.have.lengthOf(2)
-      expect(runtimes).to.deep.equal([
-        { exec: "docker", path: "/bin/docker" },
-        { exec: "podman", path: "/bin/podman" },
-      ])
-    })
+    const runtimes = await detectContainerRuntimes()
 
-  const expectedError = new Error("mock error")
-  test
-    .stub(lookpath, "lookpath", sinon.stub().rejects(expectedError))
-    .it("works with 1 runtime", () => {
-      detectContainerRuntimes()
-        .then(() => {
-          throw new Error("expected error")
-        })
-        .catch(error => expect(expectedError).to.be.equal(error))
-    })
+    expect(runtimes).toStrictEqual([])
+  })
+
+  it("works with 1 runtime", async () => {
+    lookpathMock
+      .mockResolvedValueOnce("/bin/docker")
+      .mockResolvedValue((undefined as unknown) as string)
+
+    const runtimes = await detectContainerRuntimes()
+    expect(runtimes).toStrictEqual([{ exec: "docker", path: "/bin/docker" }])
+  })
+
+  it("works with 1 runtime", async () => {
+    lookpathMock
+      .mockResolvedValueOnce("/bin/docker")
+      .mockResolvedValueOnce("/bin/podman")
+      .mockResolvedValue((undefined as unknown) as string)
+
+    const runtimes = await detectContainerRuntimes()
+    expect(runtimes).toStrictEqual([
+      { exec: "docker", path: "/bin/docker" },
+      { exec: "podman", path: "/bin/podman" },
+    ])
+  })
+
+  it("handles Errors", async () => {
+    const expectedError = new Error("mock error")
+    lookpathMock.mockRejectedValueOnce(expectedError)
+
+    expect(detectContainerRuntimes()).rejects.toStrictEqual(expectedError)
+  })
 })

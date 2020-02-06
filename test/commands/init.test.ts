@@ -1,20 +1,18 @@
-import { expect } from "@oclif/test"
-import sinon, { SinonStub } from "sinon"
-import test from ".."
-import * as configuration from "../../src/configuration"
-import * as initHook from "../../src/hooks/init"
+import { initConfig } from "../../src/configuration"
+import { mocked } from "ts-jest/utils"
+import { load } from "@oclif/config"
+
+jest.mock("../../src/configuration")
+
+const initConfigMock = mocked(initConfig)
 
 describe("init", () => {
-  test
-    .stub(initHook, "default", sinon.stub()) // prevent initConfig from being called here
-    .stub(configuration, "initConfig", sinon.stub())
-    .command(["init"])
-    .it(`calls initConfig with { rerun: true }`, () => {
-      const initConfigStub = configuration.initConfig as SinonStub
-      expect(initConfigStub.called).to.equal(true)
-      expect(initConfigStub.calledOnce).to.equal(true)
-      expect(
-        initConfigStub.calledOnceWithExactly(sinon.match({ rerun: true }))
-      ).to.equal(true)
-    })
+  it(`calls initConfig with { rerun: true }`, async () => {
+    const config = await load()
+    await config.runCommand("init")
+
+    expect(initConfigMock).toBeCalled()
+    expect(initConfigMock).toBeCalledTimes(1)
+    expect(initConfigMock).toBeCalledWith({ rerun: true })
+  })
 })

@@ -1,5 +1,5 @@
-import test from ".."
-
 describe("run", () => {
-  test
+  it("works", () => {
+    console.log("foo")
+  })
 })
