@@ -9,9 +9,9 @@ const initConfigMock = mocked(initConfig)
 describe("init", () => {
   it(`calls initConfig with { rerun: true }`, async () => {
     const config = await load()
-    await config.runCommand("init")
+    await config.runHook("init", { id: "help", argv: [] })
 
     expect(initConfigMock).toBeCalledTimes(1)
-    expect(initConfigMock).toBeCalledWith({ rerun: true })
+    expect(initConfigMock).toBeCalledWith()
   })
 })
