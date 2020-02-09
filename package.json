@@ -7,7 +7,7 @@
   "bugs": "https://github.com/robertsmieja/run-in-container/issues",
   "dependencies": {
     "@oclif/command": "^1.5.19",
-    "@oclif/config": "^1.13.3",
+    "@oclif/config": "^1.14.0",
     "@oclif/plugin-autocomplete": "^0.1.5",
     "@oclif/plugin-commands": "^1.2.3",
     "@oclif/plugin-help": "^2.2.3",
@@ -15,14 +15,14 @@
     "@oclif/plugin-warn-if-update-available": "^1.7.0",
     "conf-cli": "^0.1.9",
     "inquirer": "^7.0.4",
-    "lookpath": "^1.0.4",
+    "lookpath": "^1.0.5",
     "tslib": "^1.10.0"
   },
   "description": "CLI to assist running commands inside containers",
   "devDependencies": {
     "@oclif/dev-cli": "^1.22.2",
     "@types/inquirer": "^6.5.0",
-    "@types/jest": "^25.1.1",
+    "@types/jest": "^25.1.2",
     "@types/node": "^13.7.0",
     "chai": "^4.2.0",
     "eslint": "^6.8.0",
@@ -35,7 +35,7 @@
     "lint-staged": "^10.0.7",
     "npm-run-all": "^4.1.5",
     "prettier": "^1.19.1",
-    "rimraf": "^3.0.1",
+    "rimraf": "^3.0.2",
     "ts-jest": "^25.2.0",
     "ts-node": "^8.6.2",
     "typescript": "^3.8.1-rc"
