@@ -1,4 +1,5 @@
 import { JSONSchema } from "json-schema-typed"
+import { ContainerRuntimeOptions } from "../containerRuntimes/options/types"
 
 export const enum Properties {
   containerRuntime = "containerRuntime",
@@ -24,7 +25,6 @@ export const Schema: Record<SchemaKeys, JSONSchema> = {
       entrypoint: {
         type: "string",
       },
-
       environment: {
         type: "object", // string => string
         additionalProperties: {
@@ -50,6 +50,6 @@ export const Schema: Record<SchemaKeys, JSONSchema> = {
         },
       },
       workingDirectory: { type: "string" },
-    },
+    } as { [key in keyof ContainerRuntimeOptions]: JSONSchema | boolean },
   },
 }
