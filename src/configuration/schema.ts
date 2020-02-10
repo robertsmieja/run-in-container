@@ -9,7 +9,7 @@ export const enum Properties {
 export const enum DefaultLevel {
   global = "global",
   runtime = "runtime",
-  container = "container",
+  containerRuntime = "containerRuntime",
 }
 
 export enum ContainerRuntimes {
@@ -33,7 +33,7 @@ const defaultSchema = {
       },
     },
     interactive: {
-      type: "string",
+      type: "boolean",
     },
     port: {
       type: "object", // number => number
@@ -42,7 +42,7 @@ const defaultSchema = {
       },
     },
     tty: {
-      type: "string",
+      type: "boolean",
     },
     volume: {
       type: "object", // string => string
@@ -63,14 +63,14 @@ export const Schema: Record<SchemaKeys, JSONSchema> = {
     type: "object",
     properties: {
       [DefaultLevel.global]: defaultSchema,
-      [DefaultLevel.container]: {
+      [DefaultLevel.runtime]: {
         type: "object",
         properties: {
           [ContainerRuntimes.docker]: defaultSchema,
           [ContainerRuntimes.podman]: defaultSchema,
         },
       },
-      [DefaultLevel.container]: {
+      [DefaultLevel.containerRuntime]: {
         type: "object", // string => Defaults object
         additionalProperties: defaultSchema,
       },
