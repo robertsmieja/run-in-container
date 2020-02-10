@@ -1,9 +1,9 @@
 import Conf from "conf"
 import inquirer, { ListQuestion } from "inquirer"
 import { lookpath } from "lookpath"
-import { ContainerRuntimes, Properties, Schema } from "./schema"
+import { ContainerRuntimes, SchemaProperties, Schema } from "./schema"
 
-const configuration = new Conf<string>({
+const configuration = new Conf<string | object | boolean>({
   projectName: "run-in-container", // TODO why can't this be autodetected?
   schema: Schema,
 })
@@ -29,11 +29,11 @@ export const initConfig = async (options = { rerun: false }) => {
   const { rerun } = options
   const questions: inquirer.DistinctQuestion[] = []
 
-  if (rerun || !configuration.has(Properties.containerRuntime)) {
+  if (rerun || !configuration.has(SchemaProperties.containerRuntime)) {
     const runtimes = await detectContainerRuntimes()
 
     questions.push({
-      name: Properties.containerRuntime,
+      name: SchemaProperties.containerRuntime,
       message: "Which container runtime should be the default?",
       type: "list",
       choices: runtimes.map(({ exec, path }) => {
@@ -54,5 +54,7 @@ export const initConfig = async (options = { rerun: false }) => {
     }
   }
 }
+
+export type ConfigurationType = typeof configuration
 
 export default configuration

@@ -1,7 +1,7 @@
 import { Command, flags } from "@oclif/command"
 import { spawnSync } from "child_process"
 import configuration from "../configuration"
-import { Properties } from "../configuration/schema"
+import { SchemaProperties } from "../configuration/schema"
 import ContainerRuntimeToCLI from "../containerRuntimes/cli"
 import { ContainerRuntimeOptions } from "../containerRuntimes/options/types"
 
@@ -39,7 +39,9 @@ Any unrecognized arguments will be passed directly to the underlying CLI`
 
     const { argv, flags } = parseOutput
 
-    const containerRuntime = configuration.get(Properties.containerRuntime)
+    const containerRuntime = configuration.get(
+      SchemaProperties.containerRuntime
+    ) as string
     const { executable, subCommand, options } = ContainerRuntimeToCLI[
       containerRuntime
     ]

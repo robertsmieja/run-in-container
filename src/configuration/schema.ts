@@ -1,15 +1,16 @@
 import { JSONSchema } from "json-schema-typed"
 import { ContainerRuntimeOptions } from "../containerRuntimes/options/types"
 
-export const enum Properties {
+export const enum SchemaProperties {
   containerRuntime = "containerRuntime",
   defaults = "defaults",
 }
 
+// in order of specificity
 export const enum DefaultLevel {
   global = "global",
-  runtime = "runtime",
   containerRuntime = "containerRuntime",
+  container = "container",
 }
 
 export enum ContainerRuntimes {
@@ -18,7 +19,9 @@ export enum ContainerRuntimes {
 }
 
 // https://github.com/Microsoft/TypeScript/issues/14106#issuecomment-280253269
-export type SchemaKeys = keyof typeof Properties
+export type DefaultLevelKeys = keyof typeof DefaultLevel
+export type SchemaKeys = keyof typeof SchemaProperties
+export type ContainerRuntimeKeys = keyof typeof ContainerRuntimes
 
 const defaultSchema = {
   type: "object",
@@ -55,22 +58,22 @@ const defaultSchema = {
 } as JSONSchema
 
 export const Schema: Record<SchemaKeys, JSONSchema> = {
-  [Properties.containerRuntime]: {
+  [SchemaProperties.containerRuntime]: {
     type: "string",
     enum: Object.keys(ContainerRuntimes),
   },
-  [Properties.defaults]: {
+  [SchemaProperties.defaults]: {
     type: "object",
     properties: {
       [DefaultLevel.global]: defaultSchema,
-      [DefaultLevel.runtime]: {
+      [DefaultLevel.containerRuntime]: {
         type: "object",
         properties: {
           [ContainerRuntimes.docker]: defaultSchema,
           [ContainerRuntimes.podman]: defaultSchema,
         },
       },
-      [DefaultLevel.containerRuntime]: {
+      [DefaultLevel.container]: {
         type: "object", // string => Defaults object
         additionalProperties: defaultSchema,
       },
