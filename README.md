@@ -44,7 +44,7 @@ $ npm install -g run-in-container
 $ run-in-container COMMAND
 running command...
 $ run-in-container (-v|--version|version)
-run-in-container/0.1.2 linux-x64 node-v12.14.1
+run-in-container/0.2.0 win32-x64 node-v12.15.0
 $ run-in-container --help [COMMAND]
 USAGE
   $ run-in-container COMMAND
@@ -85,7 +85,7 @@ EXAMPLES
   $ run-in-container autocomplete --refresh-cache
 ```
 
-_See code: [@oclif/plugin-autocomplete](https://github.com/oclif/plugin-autocomplete/blob/v0.1.5/src/commands/autocomplete/index.ts)_
+_See code: [@oclif/plugin-autocomplete](https://github.com/oclif/plugin-autocomplete/blob/v0.1.5/src\commands\autocomplete\index.ts)_
 
 ## `run-in-container commands`
 
@@ -101,7 +101,7 @@ OPTIONS
   --hidden    also show hidden commands
 ```
 
-_See code: [@oclif/plugin-commands](https://github.com/oclif/plugin-commands/blob/v1.2.3/src/commands/commands.ts)_
+_See code: [@oclif/plugin-commands](https://github.com/oclif/plugin-commands/blob/v1.2.3/src\commands\commands.ts)_
 
 ## `run-in-container conf [KEY] [VALUE]`
 
@@ -125,7 +125,7 @@ OPTIONS
   -v, --value=value      value of the config
 ```
 
-_See code: [conf-cli](https://github.com/natzcam/conf-cli/blob/v0.1.9/src/commands/conf.ts)_
+_See code: [conf-cli](https://github.com/natzcam/conf-cli/blob/v0.1.9/src\commands\conf.ts)_
 
 ## `run-in-container help [COMMAND]`
 
@@ -142,7 +142,7 @@ OPTIONS
   --all  see all commands in CLI
 ```
 
-_See code: [@oclif/plugin-help](https://github.com/oclif/plugin-help/blob/v2.2.3/src/commands/help.ts)_
+_See code: [@oclif/plugin-help](https://github.com/oclif/plugin-help/blob/v2.2.3/src\commands\help.ts)_
 
 ## `run-in-container init`
 
@@ -153,7 +153,7 @@ USAGE
   $ run-in-container init
 ```
 
-_See code: [src/commands/init.ts](https://github.com/robertsmieja/run-in-container/blob/v0.1.2/src/commands/init.ts)_
+_See code: [src\commands\init.ts](https://github.com/robertsmieja/run-in-container/blob/v0.2.0/src\commands\init.ts)_
 
 ## `run-in-container run [CONTAINER OPTIONS]`
 
@@ -164,8 +164,8 @@ USAGE
   $ run-in-container run [CONTAINER OPTIONS]
 
 OPTIONS
-  -i, --interactive
-  -t, --tty
+  -i, --[no-]interactive
+  -t, --[no-]tty
   -v, --volume=volume
 
 DESCRIPTION
@@ -178,6 +178,6 @@ EXAMPLES
   $ run-in-container run -it alpine
 ```
 
-_See code: [src/commands/run.ts](https://github.com/robertsmieja/run-in-container/blob/v0.1.2/src/commands/run.ts)_
+_See code: [src\commands\run.ts](https://github.com/robertsmieja/run-in-container/blob/v0.2.0/src\commands\run.ts)_
 
 <!-- commandsstop -->
