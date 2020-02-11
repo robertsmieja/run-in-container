@@ -1,9 +1,14 @@
 import { Command, flags } from "@oclif/command"
 import { spawnSync } from "child_process"
 import configuration from "../configuration"
-import { SchemaProperties } from "../configuration/schema"
+import {
+  SchemaProperties,
+  ContainerRuntimes,
+  ContainerRuntimeKeys,
+} from "../configuration/schema"
 import ContainerRuntimeToCLI from "../containerRuntimes/cli"
 import { ContainerRuntimeOptions } from "../containerRuntimes/options/types"
+import { getDefaults } from "../configuration/defaults"
 
 export default class Run extends Command {
   static description = `Run a container. Similar to 'docker run'.
@@ -13,8 +18,16 @@ Any unrecognized arguments will be passed directly to the underlying CLI`
   static strict = false
 
   static flags = {
-    interactive: flags.boolean({ char: "i", default: false }),
-    tty: flags.boolean({ char: "t", default: false }),
+    interactive: flags.boolean({
+      char: "i",
+      default: false,
+      allowNo: true,
+    }),
+    tty: flags.boolean({
+      char: "t",
+      default: false,
+      allowNo: true,
+    }),
     volume: flags.string({ char: "v", multiple: true }),
     // help: flags.help({ char: "h" }),
     // // flag with a value (-n, --name=VALUE)
@@ -41,19 +54,23 @@ Any unrecognized arguments will be passed directly to the underlying CLI`
 
     const containerRuntime = configuration.get(
       SchemaProperties.containerRuntime
-    ) as string
+    ) as ContainerRuntimeKeys
     const { executable, subCommand, options } = ContainerRuntimeToCLI[
       containerRuntime
     ]
 
+    const resolvedFlags = {
+      ...flags,
+      ...getDefaults(configuration, containerRuntime, ""),
+    }
     let parsedArgv: string[] = subCommand ? [subCommand] : []
-    for (const [flagKey, flagValue] of Object.entries(flags)) {
+    for (const [flagKey, flagValue] of Object.entries(resolvedFlags)) {
       if (flagValue) {
         if (typeof flagValue === "boolean") {
           parsedArgv = parsedArgv.concat([
             `${options[flagKey as keyof ContainerRuntimeOptions]}`,
           ])
-        } else {
+        } else if (typeof flagValue === "string") {
           parsedArgv = parsedArgv
             .concat([`${options[flagKey as keyof ContainerRuntimeOptions]}`])
             .concat(flagValue)

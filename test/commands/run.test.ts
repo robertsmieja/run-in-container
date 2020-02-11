@@ -3,9 +3,11 @@ import { mocked } from "ts-jest/utils"
 import configuration from "../../src/configuration"
 import { spawnSync } from "child_process"
 import { ContainerRuntimes } from "../../src/configuration/schema"
+import { getDefaults } from "../../src/configuration/defaults"
 
 jest.mock("child_process")
 jest.mock("../../src/configuration")
+jest.mock("../../src/configuration/defaults")
 
 const configurationMock = mocked(configuration)
 const spawnSyncMock = mocked(spawnSync)
