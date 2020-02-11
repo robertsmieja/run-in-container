@@ -17,20 +17,29 @@ export const getDefaults = (
   containerRuntime: ContainerRuntimeKeys,
   container: string
 ) => {
-  const defaults = configuration.get(SchemaProperties.defaults) as {
-    [key in DefaultLevelKeys]:
-      | GlobalDefaultsType
-      | RuntimeDefaultsType
-      | ContainerDefaultsType
-  }
+  const defaults = configuration.get(SchemaProperties.defaults) as
+    | {
+        [key in DefaultLevelKeys]:
+          | GlobalDefaultsType
+          | RuntimeDefaultsType
+          | ContainerDefaultsType
+      }
+    | undefined
 
-  const globalDefaults = defaults.global as ContainerRuntimeOptions
-  const runtimeDefaults = defaults.containerRuntime as RuntimeDefaultsType
-  const containerDefaults = defaults.container as ContainerDefaultsType
+  const globalDefaults = defaults?.global as ContainerRuntimeOptions | undefined
+  const runtimeDefaults = defaults?.containerRuntime as
+    | RuntimeDefaultsType
+    | undefined
+  const containerDefaults = defaults?.container as
+    | ContainerDefaultsType
+    | undefined
+
+  const currentContainerDefaults = containerDefaults?.[container] ?? {}
+  const currentRuntimeDefaults = runtimeDefaults?.[containerRuntime] ?? {}
 
   return {
-    ...containerDefaults[container],
-    ...runtimeDefaults[containerRuntime],
     ...globalDefaults,
+    ...currentRuntimeDefaults,
+    ...currentContainerDefaults,
   }
 }

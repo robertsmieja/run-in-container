@@ -56,8 +56,8 @@ Any unrecognized arguments will be passed directly to the underlying CLI`
     ]
 
     const resolvedFlags = {
-      ...flags,
       ...getDefaults(configuration, containerRuntime, ""),
+      ...flags,
     }
     let parsedArgv: string[] = subCommand ? [subCommand] : []
     for (const [flagKey, flagValue] of Object.entries(resolvedFlags)) {
