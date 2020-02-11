@@ -1,14 +1,10 @@
 import { Command, flags } from "@oclif/command"
 import { spawnSync } from "child_process"
 import configuration from "../configuration"
-import {
-  SchemaProperties,
-  ContainerRuntimes,
-  ContainerRuntimeKeys,
-} from "../configuration/schema"
+import { getDefaults } from "../configuration/defaults"
+import { ContainerRuntimeKeys, SchemaProperties } from "../configuration/schema"
 import ContainerRuntimeToCLI from "../containerRuntimes/cli"
 import { ContainerRuntimeOptions } from "../containerRuntimes/options/types"
-import { getDefaults } from "../configuration/defaults"
 
 export default class Run extends Command {
   static description = `Run a container. Similar to 'docker run'.

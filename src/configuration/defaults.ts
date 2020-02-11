@@ -1,10 +1,10 @@
 import { ConfigurationType } from "."
+import { ContainerRuntimeOptions } from "../containerRuntimes/options/types"
 import {
-  SchemaProperties,
   ContainerRuntimeKeys,
   DefaultLevelKeys,
+  SchemaProperties,
 } from "./schema"
-import { ContainerRuntimeOptions } from "../containerRuntimes/options/types"
 
 type GlobalDefaultsType = ContainerRuntimeOptions
 type RuntimeDefaultsType = {

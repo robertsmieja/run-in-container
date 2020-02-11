@@ -1,5 +1,5 @@
-import { JSONSchema } from "json-schema-typed"
 import Ajv from "ajv"
+import { JSONSchema } from "json-schema-typed"
 import { Schema } from "../../src/configuration/schema"
 
 describe("Schema", () => {
