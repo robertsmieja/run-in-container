@@ -102,7 +102,7 @@
     "lint:fix": "eslint --fix ./src/**/*",
     "lint:staged": "lint-staged",
     "prettier": "prettier --write '*.{js,ts,jsx,tsx,json,md}'",
-    "postpack": "rm -f oclif.manifest.json",
+    "postpack": "rimraf oclif.manifest.json",
     "posttest": "eslint . --ext .ts --fix",
     "prepack": "npm-run-all test clean build && oclif-dev manifest && oclif-dev readme && git add README.md",
     "test": "jest --coverage",
