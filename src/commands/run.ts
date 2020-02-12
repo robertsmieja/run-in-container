@@ -6,6 +6,29 @@ import { ContainerRuntimeKeys, SchemaProperties } from "../configuration/schema"
 import ContainerRuntimeToCLI from "../containerRuntimes/cli"
 import { ContainerRuntimeOptions } from "../containerRuntimes/options/types"
 
+const resolveConfigurationToCliFlags = (
+  options: Record<keyof ContainerRuntimeOptions, string>,
+  resolvedFlags: { [name: string]: any }, // TODO can this be made more specific?
+  subCommand?: string
+) => {
+  let parsedArgv: string[] = subCommand ? [subCommand] : []
+  for (const [flagKey, flagValue] of Object.entries(resolvedFlags)) {
+    if (flagValue) {
+      if (typeof flagValue === "boolean") {
+        parsedArgv = parsedArgv.concat([
+          `${options[flagKey as keyof ContainerRuntimeOptions]}`,
+        ])
+      } else if (typeof flagValue === "string") {
+        parsedArgv = parsedArgv
+          .concat([`${options[flagKey as keyof ContainerRuntimeOptions]}`])
+          .concat(flagValue)
+      }
+    }
+  }
+
+  return parsedArgv
+}
+
 export default class Run extends Command {
   static description = `Run a container. Similar to 'docker run'.
 Run a container. Similar to 'docker run'. 
@@ -39,6 +62,7 @@ Any unrecognized arguments will be passed directly to the underlying CLI`
   static examples = [
     `$ run-in-container run alpine echo "Hello world"`,
     `$ run-in-container run --interactive --tty alpine sh`,
+    `$ run-in-container run --no-interactive --no-tty alpine sh`,
     `$ run-in-container run -it alpine`,
   ]
 
@@ -59,36 +83,15 @@ Any unrecognized arguments will be passed directly to the underlying CLI`
       ...getDefaults(configuration, containerRuntime, ""),
       ...flags,
     }
-    let parsedArgv: string[] = subCommand ? [subCommand] : []
-    for (const [flagKey, flagValue] of Object.entries(resolvedFlags)) {
-      if (flagValue) {
-        if (typeof flagValue === "boolean") {
-          parsedArgv = parsedArgv.concat([
-            `${options[flagKey as keyof ContainerRuntimeOptions]}`,
-          ])
-        } else if (typeof flagValue === "string") {
-          parsedArgv = parsedArgv
-            .concat([`${options[flagKey as keyof ContainerRuntimeOptions]}`])
-            .concat(flagValue)
-        }
-      }
-    }
+
+    const parsedArgv = resolveConfigurationToCliFlags(
+      options,
+      resolvedFlags,
+      subCommand
+    )
 
     const processArgv = parsedArgv.concat(argv)
-    // const flagKeys = Object.keys(flags)
 
-    // for (const key of flagKeys) {
-    //   flags[key]
-    // }
-    // const
-    // for (const key of Object.keys(flags as Record<string, any>)) {
-    //   flags[key] as any
-    // }
-
-    // for (const key of Object.keys(flags)) {
-    //   console.log(key, flags[key] as boolean)
-    // }
-    // flagKeys.filter(key => flags[`${key}`]).f
     this.debug(`parsedArgv: ${parsedArgv}`)
     this.debug(`executable: ${executable}`)
     this.debug(`subCommand: ${subCommand}`)
