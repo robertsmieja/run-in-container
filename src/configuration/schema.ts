@@ -44,6 +44,7 @@ const defaultSchema = {
         type: "number",
       },
     },
+    rm: { type: "boolean" },
     tty: {
       type: "boolean",
     },

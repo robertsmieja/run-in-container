@@ -8,6 +8,7 @@ const DockerCLI: ContainerRuntimeCLI = {
     environment: "--env",
     interactive: "--interactive",
     port: "--publish",
+    rm: "--rm",
     workingDirectory: "--workdir",
     tty: "--tty",
     volume: "--volume",
