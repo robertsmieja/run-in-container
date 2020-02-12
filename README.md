@@ -44,7 +44,7 @@ $ npm install -g run-in-container
 $ run-in-container COMMAND
 running command...
 $ run-in-container (-v|--version|version)
-run-in-container/0.2.0 win32-x64 node-v12.15.0
+run-in-container/0.2.1 win32-x64 node-v12.15.0
 $ run-in-container --help [COMMAND]
 USAGE
   $ run-in-container COMMAND
@@ -153,7 +153,7 @@ USAGE
   $ run-in-container init
 ```
 
-_See code: [src\commands\init.ts](https://github.com/robertsmieja/run-in-container/blob/v0.2.0/src\commands\init.ts)_
+_See code: [src\commands\init.ts](https://github.com/robertsmieja/run-in-container/blob/v0.2.1/src\commands\init.ts)_
 
 ## `run-in-container run [CONTAINER OPTIONS]`
 
@@ -175,9 +175,10 @@ DESCRIPTION
 EXAMPLES
   $ run-in-container run alpine echo "Hello world"
   $ run-in-container run --interactive --tty alpine sh
+  $ run-in-container run --no-interactive --no-tty alpine sh
   $ run-in-container run -it alpine
 ```
 
-_See code: [src\commands\run.ts](https://github.com/robertsmieja/run-in-container/blob/v0.2.0/src\commands\run.ts)_
+_See code: [src\commands\run.ts](https://github.com/robertsmieja/run-in-container/blob/v0.2.1/src\commands\run.ts)_
 
 <!-- commandsstop -->
