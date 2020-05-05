@@ -16,7 +16,7 @@
     "conf-cli": "^0.1.9",
     "inquirer": "^7.1.0",
     "lookpath": "^1.0.5",
-    "tslib": "^1.11.1"
+    "tslib": "^1.11.2"
   },
   "description": "CLI to assist running commands inside containers",
   "devDependencies": {
