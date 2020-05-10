@@ -15,7 +15,7 @@
     "@oclif/plugin-warn-if-update-available": "^1.7.0",
     "conf-cli": "^0.1.9",
     "inquirer": "^7.1.0",
-    "lookpath": "^1.0.5",
+    "lookpath": "^1.0.6",
     "tslib": "^1.11.2"
   },
   "description": "CLI to assist running commands inside containers",
