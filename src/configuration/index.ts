@@ -3,7 +3,7 @@ import inquirer, { ListQuestion } from "inquirer"
 import { lookpath } from "lookpath"
 import { ContainerRuntimes, Schema, SchemaProperties } from "./schema"
 
-const configuration = new Conf<string | object | boolean>({
+const configuration = new Conf<Record<string, string | object | boolean>>({
   projectName: "run-in-container", // TODO why can't this be autodetected?
   schema: Schema,
 })
@@ -25,8 +25,11 @@ export const detectContainerRuntimes = async () => {
   return runtimes
 }
 
-export const initConfig = async (options = { rerun: false }) => {
-  const { rerun } = options
+export interface InitConfigArguments {
+  rerun: boolean
+}
+
+export const initConfig = async ({ rerun }: InitConfigArguments) => {
   const questions: inquirer.DistinctQuestion[] = []
 
   if (rerun || !configuration.has(SchemaProperties.containerRuntime)) {

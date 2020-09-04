@@ -36,7 +36,7 @@ Any unrecognized arguments will be passed directly to the underlying CLI`
 
   static strict = false
 
-  static flags = {
+  static flags: flags.Input<any> = {
     interactive: flags.boolean({
       char: "i",
       default: false,
