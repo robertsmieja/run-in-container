@@ -12,6 +12,6 @@ describe("init", () => {
 
     await config.runHook("init", { id: "help", argv: [] })
     expect(initConfigMock).toBeCalledTimes(1)
-    expect(initConfigMock).toBeCalledWith()
+    expect(initConfigMock).toBeCalledWith({ rerun: false })
   })
 })
